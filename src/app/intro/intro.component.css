@@ -1,0 +1,24 @@
+.intro-wrapper
+{
+    height: 100%;
+    width: 100%;
+    background: black;
+    overflow: hidden;
+    position: relative;
+}
+
+.intro-picture
+{
+    position: absolute;
+}
+
+.constellations-picture
+{
+    z-index: 10;
+    position: absolute;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+}

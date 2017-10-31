@@ -1,0 +1,6 @@
+<div class="intro-wrapper">
+  <img class="constellations-picture" src="assets/img/constellations.png" (load)="TitleLoaded()">
+  <div [ngClass]="{'hidden': !firstLoaded}" class="animated fadeIn">
+      <img id="picture1" #picture class="intro-picture" src="{{picture1Url}}" (load)="ImageLoaded(1, 'picture1')"/>
+  </div>
+</div>
