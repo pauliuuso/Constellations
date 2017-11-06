@@ -12,7 +12,7 @@
     position: absolute;
 }
 
-.constellations-picture
+.intro-title
 {
     z-index: 10;
     position: absolute;
@@ -21,4 +21,11 @@
     margin-right: auto;
     left: 0;
     right: 0;
+}
+
+.title-loader
+{
+    color: grey;
+    font-size: 100px;
+    margin-top: 10%;
 }

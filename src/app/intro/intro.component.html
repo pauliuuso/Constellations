@@ -1,6 +1,12 @@
-<div class="intro-wrapper">
-  <img class="constellations-picture" src="assets/img/constellations.png" (load)="TitleLoaded()">
-  <div [ngClass]="{'hidden': !firstLoaded}" class="animated fadeIn">
-      <img id="picture1" #picture class="intro-picture" src="{{picture1Url}}" (load)="ImageLoaded(1, 'picture1')"/>
+<div class="intro-wrapper" (window:resize)="CenterImage()">
+  <div [ngClass]="{'hidden': titleLoaded}" class="col-12 text-center mt-5">
+    <i class="fa fa-circle-o-notch fa-spin title-loader"></i>
   </div>
+  <!-- <img #picture [ngClass]="{'visibility-hidden': !imageLoaded}" class="intro-picture animated fadeIn" src="{{pictureUrl}}" (load)="ImageLoaded()"/> -->
+  <video muted loop autoplay poster="{{pictureUrl}}" #video [ngClass]="{'visibility-hidden': !imageLoaded}" class="intro-picture animated fadeIn">
+    <source src="{{videoUrl + '.webm'}}" type="video/webm">
+    <source src="{{videoUrl + '.ogv'}}" type="video/ogg">
+    <source src="{{videoUrl + '.mp4'}}" type="video/mp4">
+  </video>
+  <img [ngClass]="{'hidden': !titleLoaded}" class="intro-title animated fadeIn" src="{{titleUrl}}" (load)="TitleLoaded()">
 </div>

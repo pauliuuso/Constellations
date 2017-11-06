@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-declare var glitch: any;
+import { LinkService } from '../link.service';
 
 @Component({
   selector: 'app-intro',
@@ -10,86 +10,80 @@ declare var glitch: any;
 export class IntroComponent implements OnInit 
 {
 
-  @ViewChild("picture")
-  picture: ElementRef;
+  @ViewChild("video")
+  video: ElementRef;
 
-  baseImageUrl = "assets/img/";
+  baseUrl = "assets/img/intro/";
 
-  firstLoaded = false;
-  picture1Url = "";
+  pictureUrl = this.baseUrl + this.linkService.introVideos[0]["picture"];
+  videoUrl = this.baseUrl + this.linkService.introVideos[0]["video"];
+  titleUrl = this.baseUrl + this.linkService.introTitles[0];
 
-  secondLoaded = false;
-  picture2Url = "";
+  titleLoaded = false;
+  imageLoaded = false;
 
   wrapperWidth: number;
   wrapperHeight: number;
   imageWidth: number;
   imageHeight: number;
 
-  constructor() { }
+  constructor( private linkService: LinkService ) { }
 
-  ngOnInit() 
+  ngOnInit() {}
+
+  public ImageLoaded()
   {
-    this.wrapperWidth = this.picture.nativeElement.parentNode.offsetWidth;
-    this.wrapperHeight = this.picture.nativeElement.parentNode.offsetHeight;
+    this.imageLoaded = true;
+    this.ShowImage();
   }
 
-  public ImageLoaded(number: number, id: string)
+  public ShowImage()
   {
-
-      this.imageWidth = this.picture.nativeElement.offsetWidth;
-      this.imageHeight = this.picture.nativeElement.offsetHeight;
-  
-      this.CenterImage(number, id);
-
-      if(number == 1)
-      {
-        glitch(this.picture1Url, function(image, success, object)
-        {
-          var imageToGlitch = document.getElementById(id) as HTMLImageElement;
-          imageToGlitch.src = image;
-        }, 25, 20);
-        this.firstLoaded = true;
-      }
-      else if(number == 2)
-      {
-        this.secondLoaded = true;
-      }
-
+    if(this.imageWidth === 0)
+    {
+      this.RecalculateDimensions();
+      this.ShowImage();
+    }
+    else
+    {
+      this.CenterImage();
+    }
   }
 
   public TitleLoaded()
   {
-    this.picture1Url = this.baseImageUrl + "intro1.jpg";
+    this.titleLoaded = true;
+    this.ImageLoaded();
   }
 
-  public CenterImage(number: number, id: string)
+  public CenterImage()
   {
+    this.RecalculateDimensions();
 
     if(this.imageWidth > this.wrapperWidth || this.imageHeight < this.wrapperHeight)
     {
-      this.picture.nativeElement.style.height = "100%";
-      this.picture.nativeElement.style.width = "";
+      this.video.nativeElement.style.height = "100%";
+      this.video.nativeElement.style.width = "";
       this.RecalculateDimensions();
     }
 
     if(this.imageWidth < this.wrapperWidth)
     {
-      this.picture.nativeElement.style.height = "";
-      this.picture.nativeElement.style.width = "100%";
+      this.video.nativeElement.style.height = "";
+      this.video.nativeElement.style.width = "100%";
       this.RecalculateDimensions();
     }
 
-    this.picture.nativeElement.style.left = "-" + (this.imageWidth - this.wrapperWidth)/2 + "px";
+    this.video.nativeElement.style.left = "-" + (this.imageWidth - this.wrapperWidth)/2 + "px";
 
   }
 
   public RecalculateDimensions()
   {
-    this.imageWidth = this.picture.nativeElement.offsetWidth;
-    this.imageHeight = this.picture.nativeElement.offsetHeight;
-    this.wrapperWidth = this.picture.nativeElement.parentNode.offsetWidth;
-    this.wrapperHeight = this.picture.nativeElement.parentNode.offsetHeight;
+    this.imageWidth = this.video.nativeElement.offsetWidth;
+    this.imageHeight = this.video.nativeElement.offsetHeight;
+    this.wrapperWidth = this.video.nativeElement.parentNode.offsetWidth;
+    this.wrapperHeight = window.innerHeight;
   }
 
 }

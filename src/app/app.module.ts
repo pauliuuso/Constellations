@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { IntroComponent } from './intro/intro.component';
 
+import { LinkService } from './link.service';
 
 const appRoutes: Routes =
 [
@@ -23,7 +24,7 @@ const appRoutes: Routes =
     RouterModule.forRoot(appRoutes),
     BrowserModule
   ],
-  providers: [],
+  providers: [LinkService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
