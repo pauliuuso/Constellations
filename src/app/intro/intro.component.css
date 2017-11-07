@@ -1,31 +1,32 @@
 .intro-wrapper
 {
-    height: 100%;
-    width: 100%;
-    background: black;
-    overflow: hidden;
-    position: relative;
+  height: 100%;
+  width: 100%;
+  background: black;
+  overflow: hidden;
+  position: relative;
 }
 
 .intro-picture
 {
-    position: absolute;
+  position: absolute;
 }
 
 .intro-title
 {
-    z-index: 10;
-    position: absolute;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
+  z-index: 10;
+  position: absolute;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
 }
 
 .title-loader
 {
-    color: grey;
-    font-size: 100px;
-    margin-top: 10%;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
