@@ -1,6 +1,7 @@
 <div class="intro-wrapper" (window:resize)="CenterImage()">
-  <i class="fa constellations-spinner fa-spin title-loader"></i>
-  <!-- <img #picture [ngClass]="{'visibility-hidden': !imageLoaded}" class="intro-picture animated fadeIn" src="{{pictureUrl}}" (load)="ImageLoaded()"/> -->
+  <div class="row">
+      <div [ngClass]="{'hidden': titleLoaded}" class="fa constellations-spinner fa-spin"></div>
+  </div>
   <video muted loop autoplay poster="{{pictureUrl}}" #video [ngClass]="{'visibility-hidden': !imageLoaded}" class="intro-picture animated fadeIn">
     <source src="{{videoUrl + '.webm'}}" type="video/webm">
     <source src="{{videoUrl + '.ogv'}}" type="video/ogg">

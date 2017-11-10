@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { LinkService } from '../link.service';
+import { Observable } from 'rxjs'
 
 @Component({
   selector: 'app-intro',
@@ -31,21 +32,16 @@ export class IntroComponent implements OnInit
 
   ngOnInit() {}
 
-  public ImageLoaded()
-  {
-    this.imageLoaded = true;
-    this.ShowImage();
-  }
-
   public ShowImage()
   {
-    if(this.imageWidth === 0)
+    if(this.imageWidth === 0 || this.imageWidth < this.wrapperWidth || this.imageHeight < this.wrapperHeight)
     {
       this.RecalculateDimensions();
       this.ShowImage();
     }
     else
     {
+      this.imageLoaded = true;
       this.CenterImage();
     }
   }
@@ -53,7 +49,7 @@ export class IntroComponent implements OnInit
   public TitleLoaded()
   {
     this.titleLoaded = true;
-    this.ImageLoaded();
+    Observable.interval(1000).subscribe(() => this.ShowImage());
   }
 
   public CenterImage()

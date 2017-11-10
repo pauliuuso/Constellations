@@ -23,10 +23,14 @@
   right: 0;
 }
 
-.title-loader
+.constellations-spinner
 {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    margin-top: 50px;
+    width: 150px;
+    height: 150px;
+    background: url('../../assets/icons/constellations-spinner.svg');
+    background-size: 150px 150px;
+    text-indent: -9999px;
+    margin-left: auto;
+    margin-right: auto;
 }
