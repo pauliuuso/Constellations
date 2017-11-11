@@ -34,16 +34,13 @@ export class IntroComponent implements OnInit
 
   public ShowImage()
   {
-    if(this.imageWidth === 0 || this.imageWidth < this.wrapperWidth || this.imageHeight < this.wrapperHeight)
+    console.log("show image");
+    if(this.imageWidth > 0 && this.imageHeight > 0 && !this.imageLoaded)
     {
-      this.RecalculateDimensions();
-      this.ShowImage();
-    }
-    else
-    {
+      this.video.nativeElement.className += " animated fadeIn";
       this.imageLoaded = true;
-      this.CenterImage();
     }
+    this.CenterImage();
   }
 
   public TitleLoaded()
