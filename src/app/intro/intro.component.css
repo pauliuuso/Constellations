@@ -23,14 +23,11 @@
   right: 0;
 }
 
-.constellations-spinner
+.intro-spinner
 {
-    margin-top: 50px;
-    width: 150px;
-    height: 150px;
-    background: url('../../assets/icons/constellations-spinner.svg');
-    background-size: 150px 150px;
-    text-indent: -9999px;
+    margin-top: 200px;
     margin-left: auto;
     margin-right: auto;
+    font-size: 64px;
+    color: lightslategray
 }

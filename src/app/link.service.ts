@@ -11,7 +11,7 @@ export class LinkService
 
   public introTitles =
   [
-    "title1.gif"
+    "title1"
   ];
 
   constructor() { }
