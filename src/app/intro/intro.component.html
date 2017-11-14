@@ -4,11 +4,8 @@
   </div>
   <video muted loop autoplay poster="{{pictureUrl}}" #video [ngClass]="{'visibility-hidden': !imageLoaded}" class="intro-picture">
     <source src="{{videoUrl + '.webm'}}" type="video/webm">
-    <source src="{{videoUrl + '.ogv'}}" type="video/ogg">
+    <!-- <source src="{{videoUrl + '.ogv'}}" type="video/ogg"> -->
     <source src="{{videoUrl + '.mp4'}}" type="video/mp4">
   </video>
-  <video muted loop autoplay [ngClass]="{'hidden': !titleLoaded}" class="intro-title animated fadeIn" (loadeddata)="TitleLoaded()">
-    <source src="{{titleUrl + '.webm'}}" type="video/webm">
-    <source src="{{titleUrl + '.mp4'}}" type="video/mp4">
-  </video>
+  <img [ngClass]="{'hidden': !titleLoaded}" src="{{titleUrl}}" class="intro-title animated fadeIn" (load)="TitleLoaded()">
 </div>

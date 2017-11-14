@@ -16,8 +16,9 @@ export class IntroComponent implements OnInit
 
   baseUrl = "assets/img/intro/";
 
-  pictureUrl = this.baseUrl + this.linkService.introVideos[0]["picture"];
-  videoUrl = this.baseUrl + this.linkService.introVideos[0]["video"];
+  videoRandom = this.linkService.GetRandomRange(0, this.linkService.introVideos.length);
+  pictureUrl = this.baseUrl + this.linkService.introVideos[this.videoRandom]["picture"];
+  videoUrl = this.baseUrl + this.linkService.introVideos[this.videoRandom]["video"];
   titleUrl = this.baseUrl + this.linkService.introTitles[0];
 
   titleLoaded = false;
