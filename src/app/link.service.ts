@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 
 @Injectable()
-export class LinkService 
+export class LinkService
 {
+  public imagesLoaded = 0;
 
   public introVideos =
   [

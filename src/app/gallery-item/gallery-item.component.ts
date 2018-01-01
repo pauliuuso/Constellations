@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, Input, ElementRef } from '@angular/core';
+import { LinkService } from '../link.service';
 declare var $:any;
 
 @Component({
@@ -24,7 +25,7 @@ export class GalleryItemComponent implements OnInit
   @Input()
   id: string;
 
-  constructor() { }
+  constructor(private linkService: LinkService) { }
 
   ngOnInit()
   {
@@ -34,6 +35,7 @@ export class GalleryItemComponent implements OnInit
 
   public ImageLoaded()
   {
+    this.linkService.imagesLoaded++;
     this.imageWidth = this.picture.nativeElement.width;
     this.imageHeight = this.picture.nativeElement.height;
     this.CenterImage();

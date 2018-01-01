@@ -1,14 +1,19 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
+import { Subject } from 'rxjs/Subject';
+import { LinkService } from '../link.service';
+declare var $:any;
 
 @Component({
   selector: 'app-gallery',
   templateUrl: './gallery.component.html',
   styleUrls: ['./gallery.component.css']
 })
-export class GalleryComponent implements OnInit, AfterViewInit {
-
-  public testurl = "https://arthistory327.files.wordpress.com/2012/09/wilderness1.jpg";
+export class GalleryComponent implements OnInit
+{
   public loading = true;
+  public preloadImagesCount = 20;
+  private unsubscribe: Subject<void> = new Subject<void>();
 
   public constellations =
   [
@@ -77,23 +82,22 @@ export class GalleryComponent implements OnInit, AfterViewInit {
     }
   ];
 
-  constructor() { }
+  constructor(private linkService: LinkService) { }
 
   ngOnInit()
   {
-    document.body.style.overflow = 'hidden';
-  }
-
-  ngAfterViewInit()
-  {
-    this.GalleryLoaded();
-  }
-
-  public GalleryLoaded()
-  {
-    this.loading = false;
-    document.body.style.overflow = 'visible';
-    console.log("loaded");
+    this.linkService.imagesLoaded = 0;
+    Observable.interval(500)
+    .takeUntil(this.unsubscribe)
+    .subscribe(x =>
+    {
+      if(this.linkService.imagesLoaded > this.preloadImagesCount - 1)
+      {
+        this.unsubscribe.next();
+        this.unsubscribe.complete();
+        this.loading = false;
+      }
+    });
   }
 
 }
