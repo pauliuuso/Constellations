@@ -1,4 +1,4 @@
-<div class="intro-wrapper" (window:resize)="CenterImage()">
+<div class="intro-wrapper" (window:resize)="CenterImage()" (window:click)="GotoGallery()">
   <div class="row">
       <div [ngClass]="{'hidden': titleLoaded}" class="fa fa-circle-o-notch fa-spin intro-spinner"></div>
   </div>

@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { LinkService } from '../link.service';
-import { Observable } from 'rxjs'
+import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
+import { Subject } from 'rxjs/Subject';
 
 @Component({
   selector: 'app-intro',
@@ -8,8 +10,9 @@ import { Observable } from 'rxjs'
   styleUrls: ['./intro.component.css']
 })
 
-export class IntroComponent implements OnInit 
+export class IntroComponent implements OnInit, OnDestroy
 {
+  private unsubscribe: Subject<void> = new Subject<void>();
 
   @ViewChild("video")
   video: ElementRef;
@@ -29,9 +32,15 @@ export class IntroComponent implements OnInit
   imageWidth: number;
   imageHeight: number;
 
-  constructor( private linkService: LinkService ) { }
+  constructor( private linkService: LinkService, private router: Router ) { }
 
   ngOnInit() {}
+
+  ngOnDestroy()
+  {
+    this.unsubscribe.next();
+    this.unsubscribe.complete();
+  }
 
   public ShowImage()
   {
@@ -47,7 +56,10 @@ export class IntroComponent implements OnInit
   public TitleLoaded()
   {
     this.titleLoaded = true;
-    Observable.interval(1000).subscribe(() => this.ShowImage());
+    Observable.interval(1000)
+    .takeUntil(this.unsubscribe)
+    .subscribe(() => this.ShowImage())
+    ;
   }
 
   public CenterImage()
@@ -78,6 +90,11 @@ export class IntroComponent implements OnInit
     this.imageHeight = this.video.nativeElement.offsetHeight;
     this.wrapperWidth = this.video.nativeElement.parentNode.offsetWidth;
     this.wrapperHeight = window.innerHeight;
+  }
+
+  public GotoGallery()
+  {
+    this.router.navigate(["gallery"]);
   }
 
 }

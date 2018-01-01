@@ -5,6 +5,7 @@
   background: black;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
 }
 
 .intro-picture

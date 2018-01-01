@@ -1,0 +1,3 @@
+<div class="gallery-image-wrapper" (window:resize)="OnResize()">
+  <img #picture (load)="ImageLoaded()" class="p-0 m-0 gallery-image" [ngClass]="{'smaller-than-wrapper': smallerThanWrapper}" src="{{url}}"/>
+</div>

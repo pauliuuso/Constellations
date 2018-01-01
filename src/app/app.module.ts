@@ -6,19 +6,27 @@ import { AppComponent } from './app.component';
 import { IntroComponent } from './intro/intro.component';
 
 import { LinkService } from './link.service';
+import { GalleryComponent } from './gallery/gallery.component';
+import { GalleryItemComponent } from './gallery-item/gallery-item.component';
 
 const appRoutes: Routes =
 [
   {
     path: '',
     component: IntroComponent
+  },
+  {
+    path: 'gallery',
+    component: GalleryComponent
   }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    IntroComponent
+    IntroComponent,
+    GalleryComponent,
+    GalleryItemComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
