@@ -9,6 +9,8 @@ import { LinkService } from './link.service';
 import { GalleryComponent } from './gallery/gallery.component';
 import { GalleryItemComponent } from './gallery-item/gallery-item.component';
 
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 const appRoutes: Routes =
 [
   {
@@ -32,7 +34,7 @@ const appRoutes: Routes =
     RouterModule.forRoot(appRoutes),
     BrowserModule
   ],
-  providers: [LinkService],
+  providers: [LinkService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

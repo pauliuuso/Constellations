@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
-import { Subject } from 'rxjs/Subject';
 import { LinkService } from '../link.service';
 declare var $:any;
 
@@ -11,10 +10,6 @@ declare var $:any;
 })
 export class GalleryComponent implements OnInit
 {
-  public loading = true;
-  public preloadImagesCount = 20;
-  private unsubscribe: Subject<void> = new Subject<void>();
-
   public constellations =
   [
     {
@@ -86,18 +81,6 @@ export class GalleryComponent implements OnInit
 
   ngOnInit()
   {
-    this.linkService.imagesLoaded = 0;
-    Observable.interval(500)
-    .takeUntil(this.unsubscribe)
-    .subscribe(x =>
-    {
-      if(this.linkService.imagesLoaded > this.preloadImagesCount - 1)
-      {
-        this.unsubscribe.next();
-        this.unsubscribe.complete();
-        this.loading = false;
-      }
-    });
   }
 
 }

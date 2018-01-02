@@ -16,6 +16,8 @@ export class GalleryItemComponent implements OnInit
   imageWidth: number;
   imageHeight: number;
 
+  loading = true;
+
   @ViewChild("picture")
   picture: ElementRef;
 
@@ -35,10 +37,10 @@ export class GalleryItemComponent implements OnInit
 
   public ImageLoaded()
   {
-    this.linkService.imagesLoaded++;
     this.imageWidth = this.picture.nativeElement.width;
     this.imageHeight = this.picture.nativeElement.height;
     this.CenterImage();
+    this.loading = false;
   }
 
   public decode(text: string)
