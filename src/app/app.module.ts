@@ -10,6 +10,7 @@ import { GalleryComponent } from './gallery/gallery.component';
 import { GalleryItemComponent } from './gallery-item/gallery-item.component';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { LoginComponent } from './login/login.component';
 
 const appRoutes: Routes =
 [
@@ -20,6 +21,10 @@ const appRoutes: Routes =
   {
     path: 'gallery',
     component: GalleryComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 
@@ -28,7 +33,8 @@ const appRoutes: Routes =
     AppComponent,
     IntroComponent,
     GalleryComponent,
-    GalleryItemComponent
+    GalleryItemComponent,
+    LoginComponent
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
