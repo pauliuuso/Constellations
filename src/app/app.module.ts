@@ -1,6 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { IntroComponent } from './intro/intro.component';
@@ -11,6 +13,8 @@ import { GalleryItemComponent } from './gallery-item/gallery-item.component';
 
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { LoginComponent } from './login/login.component';
+import { UserService } from './user.service';
+
 
 const appRoutes: Routes =
 [
@@ -38,9 +42,11 @@ const appRoutes: Routes =
   ],
   imports: [
     RouterModule.forRoot(appRoutes),
+    ReactiveFormsModule,
+    HttpModule,
     BrowserModule
   ],
-  providers: [LinkService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
+  providers: [LinkService, UserService, {provide: LocationStrategy, useClass: HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

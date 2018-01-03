@@ -64,13 +64,7 @@ export class LoginComponent implements OnInit, OnDestroy
           const response = data.json();
           if(response["message"] === "OK")
           {
-            this.userService.email = this.email.value;
-            this.userService.id = response["id"];
-            this.userService.token = response["token"];
-            this.userService.name = response["name"];
-            this.userService.role = response["role"];
-
-            this.userService.SetUserLoggedIn();
+            this.userService.Login(response["name"], response["email"], response["id"], response["token"]);
             this.router.navigate([""]);
           }
           else

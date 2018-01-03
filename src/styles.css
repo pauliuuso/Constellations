@@ -16,3 +16,8 @@ html, body
 {
     visibility: hidden;
 }
+
+.main-container
+{
+    height: 100%;
+}

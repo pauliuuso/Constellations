@@ -1,57 +1,52 @@
 import { Injectable } from '@angular/core';
+declare var $:any;
 
 @Injectable()
 export class UserService
 {
 
-  private isLogged:boolean;
-  public email:string;
-  public name:string;
-  public id:string;
-  public token:string;
-  public role:string;
+  public isLogged = false;
+  public email = "";
+  public name = "";
+  public token = "";
+  public id = "";
   public baseApiUrl = "http://constellations.teroute.com/api";
 
-  constructor(){}
-
-  public SetUserLoggedIn()
+  constructor()
   {
-    this.isLogged = true;
-    localStorage.setItem("isLogged", "true");
-    localStorage.setItem("token", this.token);
-    localStorage.setItem("id", this.id);
-    localStorage.setItem("email", this.email);
-    localStorage.setItem("name", this.name);
-    localStorage.setItem("role", this.role);
-  }
-
-  public CheckUserInStorage()
-  {
-    if(localStorage.getItem("isLogged") === "true")
+    if($.cookie("name"))
     {
-      this.isLogged = true;
-      this.email = localStorage.getItem("email");
-      this.name = localStorage.getItem("name");
-      this.id = localStorage.getItem("id");
-      this.token = localStorage.getItem("token");
-      this.role = localStorage.getItem("role");
+      this.Login($.cookie("name"), $.cookie("email"), $.cookie("id"), $.cookie("token"));
     }
   }
 
-  public SetUserLoggedOut()
+  public Login(name: string, email: string, id: string, token: string)
   {
+    this.name = name;
+    this.email = email;
+    this.id = id;
+    this.token = token;
+
+    $.cookie("name", name);
+    $.cookie("email", email);
+    $.cookie("id", id);
+    $.cookie("token", token);
+
+    this.isLogged = true;
+  }
+
+  public Logout()
+  {
+    const cookies = $.cookie();
+
+    for(const cookie in cookies)
+    {
+      if(cookie)
+      {
+        $.removeCookie(cookie);
+      }
+    }
+
     this.isLogged = false;
-    this.email = "";
-    this.name = "";
-    this.id = "";
-    this.token = "";
-    this.role = "";
-    localStorage.clear();
   }
-
-  public GetUserLoggedIn()
-  {
-    return this.isLogged;
-  }
-
 }
